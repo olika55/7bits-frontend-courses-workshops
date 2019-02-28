@@ -1,0 +1,11 @@
+.side-bar {
+    width: 100%;
+}
+
+.side-bar__title {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+    color: #244f92;
+    font-size: 20px;
+    font-weight: 700;
+}

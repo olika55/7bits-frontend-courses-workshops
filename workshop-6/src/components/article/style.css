@@ -1,0 +1,13 @@
+.article {
+    font-family: Helvetica, sans-serif;
+    margin-bottom: 40px;
+}
+
+.article:last-child {
+    margin-bottom: 0;
+}
+
+.article__title {
+    color: #244f92;
+    margin: 0;
+}
