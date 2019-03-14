@@ -1,0 +1,34 @@
+.side-bar {
+    width: 100%;
+}
+
+.nav-menu {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+    color: #244f92;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.nav-menu__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-menu__link {
+    display: block;
+    padding: 8px 10px;
+    font-family: Helvetica, sans-serif;
+    color: #244f92;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.nav-menu__link:hover {
+    background-color: #d2d2d2;
+}
+
+.nav-menu__link_active {
+    background-color: #d2d2d2;
+}
