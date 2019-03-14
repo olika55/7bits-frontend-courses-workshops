@@ -16,13 +16,19 @@
     list-style: none;
 }
 
-.nav-menu__item {
+.nav-menu__link {
+    display: block;
     padding: 8px 10px;
     font-family: Helvetica, sans-serif;
     color: #244f92;
     font-size: 18px;
+    text-decoration: none;
 }
 
-.nav-menu__item:hover {
+.nav-menu__link:hover {
+    background-color: #d2d2d2;
+}
+
+.nav-menu__link_active {
     background-color: #d2d2d2;
 }
