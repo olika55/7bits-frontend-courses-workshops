@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import Button from '../../components/button/Button';
-import FormField from '../../components/formField/FormField';
+import getItemList from '../../actions/itemList/getItemList';
 
 import './style.css';
 
@@ -15,28 +15,15 @@ class Home extends React.Component {
     };
   };
 
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value
-    });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.setState({
-      itemList: [
-        ...this.state.itemList,
-        this.state.value
-      ],
-      value: ''
-    });
-  };
+  componentDidMount() {
+    this.props.getItemList();
+  }
 
   renderList = () => {
-    const items = this.state.itemList.map((item, index) => {
+    const items = this.props.itemList.map((item) => {
       return (
-        <li key={index} className='list__item'>
-          {index}. {item}
+        <li key={item.id} className='list__item'>
+          {item.text}
         </li>
       );
     });
@@ -51,23 +38,6 @@ class Home extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <form
-          className='form'
-          onSubmit={this.handleSubmit}
-        >
-          <FormField
-            className='form__field'
-            value={this.state.value}
-            placeholder='Какое-то значение'
-            onChange={this.handleChange}
-          />
-          <Button
-            className='form__button'
-            type='submit'
-            value='Добавить'
-            disabled={this.state.value.length === 0}
-          />
-        </form>
         {this.renderList()}
       </React.Fragment>
     );
@@ -75,9 +45,11 @@ class Home extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  getItemList: bindActionCreators(getItemList, dispatch)
 });
 
 const mapStateToProps = (state) => ({
+  itemList: state.itemListReducer.itemList
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,14 +1,3 @@
-.form__field {
-    display: inline-block;
-    width: calc(80% - 20px);
-    margin-right: 20px;
-}
-
-.form__button {
-    display: inline-block;
-    width: 20%;
-}
-
 .list {
     padding: 0;
     margin: 0;
