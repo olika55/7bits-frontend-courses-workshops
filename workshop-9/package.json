@@ -1,11 +1,13 @@
 {
-  "name": "workshop-7",
+  "name": "workshop-9",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
-    "react-router-dom": "^4.3.1"
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "react-scripts": "2.1.5"

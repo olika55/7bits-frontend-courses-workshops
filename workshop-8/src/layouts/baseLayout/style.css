@@ -1,0 +1,8 @@
+.content {
+    flex: 1 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 960px;
+    padding: 0 10px;
+    margin: 34px auto;
+}
