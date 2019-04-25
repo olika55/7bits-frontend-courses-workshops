@@ -1,0 +1,10 @@
+{
+  "layout": {
+    "header": {
+      "title": "Шапка"
+    },
+    "footer": {
+      "title": "Подвал"
+    }
+  }
+}

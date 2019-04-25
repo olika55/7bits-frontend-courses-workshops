@@ -1,0 +1,10 @@
+{
+  "layout": {
+    "header": {
+      "title": "Header"
+    },
+    "footer": {
+      "title": "Footer"
+    }
+  }
+}
