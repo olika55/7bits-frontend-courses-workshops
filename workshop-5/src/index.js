@@ -15,36 +15,39 @@ document.addEventListener("DOMContentLoaded", function() {
   const root = $('#root');
   root.append(indexTemplate());
   const content = $('.content');
-  const arr_prom = [fetch('api/data1.json'), fetch('api/data2.json'), fetch('api/data3.json')];
+
   let arr = [];
-  let i = 0;
 
-    Promise.all(arr_prom)
+    let d1 = fetch('api/data1.json');
+    let d2 = fetch('api/data2.json');
+    let d3 = fetch('api/data3.json');
+    let d4 = fetch('api/data4.json');
+
+    Promise.all([d1, d2, d3, d4])
         .then(values => {
-        values.forEach((item) => {
-            arr[i] = item.json();
-            i += 1;
-        });
-        return arr;
-    })
-        .then((arr) => {
-            arr.forEach((item) => {
-                item.then((res) => {
-                    res.data.forEach((it) => {
-                        content.append(articleTemplate(it));
-                        // console.log(it);
-                    })
-                })
+            console.log(values);
+            values.map((item) => {
+                console.log(item);
+                if(item.ok) {
+                        let it = item.json().catch(e => {console.log("incorrect json ", item.url, ". ", e)});
+                        arr.push(it);
+                }
+                else {
+                    arr.push(Promise.reject(item.url+", status: "+item.status));
+                    // return reject(item.url+", status: "+item.status);
+                }
+            });
+            return arr;
+        })
+       .then(arr => {
+            arr.map((json) => {
+                console.log('parsed json', json);
             })
+        })
+        .catch(ex => {
+            console.log('general error', ex);
         });
 
-  /*fetch('api/data1.json')
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        result.data.forEach((item) => {
-          content.append(articleTemplate(item));
-        })
-      })*/
+
+
 });
