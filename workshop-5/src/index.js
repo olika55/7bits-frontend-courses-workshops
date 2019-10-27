@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         arr.push(it);
                 }
                 else {
-                    arr.push(Promise.reject(item.url+", status: "+item.status));
-                    // return reject(item.url+", status: "+item.status);
+                    // arr.push(Promise.reject(item.url+", status: "+item.status));
+                    throw new Error(item.url+", status: "+item.status);
                 }
             });
             return arr;
