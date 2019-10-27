@@ -25,29 +25,36 @@ document.addEventListener("DOMContentLoaded", function() {
 
     Promise.all([d1, d2, d3, d4])
         .then(values => {
-            console.log(values);
+            // console.log(values);
             values.map((item) => {
-                console.log(item);
+                // console.log(item);
                 if(item.ok) {
                         let it = item.json().catch(e => {console.log("incorrect json ", item.url, ". ", e)});
                         arr.push(it);
                 }
                 else {
-                    // arr.push(Promise.reject(item.url+", status: "+item.status));
-                    throw new Error(item.url+", status: "+item.status);
+                    arr.push(Promise.reject(item.url+", status: "+item.status));
+                    // throw new Error(item.url+", status: "+item.status);
                 }
             });
             return arr;
         })
        .then(arr => {
-            arr.map((json) => {
-                console.log('parsed json', json);
+            arr.map((item) => {
+                // console.log('parsed json', item);
+                item.then((res) => {
+                    // console.log("res: ", res);
+                    if(res) {
+                        res.data.forEach((it) => {
+                            content.append(articleTemplate(it));
+                        })
+                    }
+
+                })
             })
         })
         .catch(ex => {
             console.log('general error', ex);
         });
-
-
 
 });
