@@ -5,10 +5,10 @@ import articleTemplate from './components/article/article.hbs';
 import spinnerTemplate from './components/spinner/spinner.hbs';
 
 const urls = [
-  'data1.json',
-  'data2.json',
-  'data3.json',
-  'data4.json'
+  'api/data1.json',
+  'api/data2.json',
+  'api/data3.json',
+  'api/data4.json'
 ];
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -16,14 +16,15 @@ document.addEventListener("DOMContentLoaded", function() {
   root.append(indexTemplate());
   const content = $('.content');
 
+  let arrProm = [];
   let arr = [];
 
-    let d1 = fetch('api/data1.json');
-    let d2 = fetch('api/data2.json');
-    let d3 = fetch('api/data3.json');
-    let d4 = fetch('api/data4.json');
+  urls.map((url) => {
+      console.log(url);
+     arrProm.push(fetch(url));
+  });
 
-    Promise.all([d1, d2, d3, d4])
+    Promise.all(arrProm)
         .then(values => {
             // console.log(values);
             values.map((item) => {
@@ -33,10 +34,14 @@ document.addEventListener("DOMContentLoaded", function() {
                         arr.push(it);
                 }
                 else {
-                    arr.push(Promise.reject(item.url+", status: "+item.status));
+                    let p = new Promise((resolve,reject) => {console.log("rejected!!");reject(new Error(item.url+", status: "+item.status));});
+                    p.catch(err=>{console.log(err);});
+                    // arr.push(p);
                     // throw new Error(item.url+", status: "+item.status);
                 }
             });
+            // console.log("arr:");
+            // console.log(arr);
             return arr;
         })
        .then(arr => {
@@ -56,5 +61,4 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(ex => {
             console.log('general error', ex);
         });
-
 });
