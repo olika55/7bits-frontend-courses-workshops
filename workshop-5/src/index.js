@@ -19,8 +19,10 @@ document.addEventListener("DOMContentLoaded", function() {
   let arrProm = [];
   let arr = [];
 
+  content.append(spinnerTemplate());
+
   urls.map((url) => {
-      console.log(url);
+      // console.log(url);
      arrProm.push(fetch(url));
   });
 
@@ -58,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 })
             })
         })
+        .finally(() => { setTimeout(()=>$(".spinner").remove(), 5000)})
         .catch(ex => {
             console.log('general error', ex);
         });
