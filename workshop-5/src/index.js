@@ -52,15 +52,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 item.then((res) => {
                     // console.log("res: ", res);
                     if(res) {
+                        setTimeout(() => {}, 5000);
                         res.data.forEach((it) => {
-                            content.append(articleTemplate(it));
+                            setTimeout(() => {content.append(articleTemplate(it));}, 5000);
                         })
                     }
 
                 })
             })
         })
-        .finally(() => { setTimeout(()=>$(".spinner").remove(), 5000)})
+        .finally(() => { setTimeout(()=>$("#loading").remove(), 5000)})
         .catch(ex => {
             console.log('general error', ex);
         });
