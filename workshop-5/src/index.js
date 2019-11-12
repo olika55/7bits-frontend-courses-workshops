@@ -18,28 +18,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
   content.append(spinnerTemplate());
 
-    const arrProm = urls.map((url) => {
+    Promise.all(urls.map((url) => {
       return fetch(url)
           .then((response) => {
               if(response.ok) {
-                  return response.json();
+                  return response.json().catch((er) => {console.log("error in json: ",er,". File ",response.url)});
               }
               return Promise.reject(response.url+", status: "+response.status+" ("+response.statusText+")");
               })
           .catch((error) => {
               console.log("error in catch: ", error);
           })
-          });
-
-    console.log("arrProm:");
-    console.log(arrProm);
-
-    Promise.all(arrProm)
+          }))
         .then(values => {
-            console.log("values:");
-            console.log(values);
+            // console.log("values:");
+            // console.log(values);
             values.forEach((item, ind, values) => {
-                console.log('parsed json or an error promise: ', item);
+                // console.log('parsed json or an error promise: ', item);
                     if(item) {
                         setTimeout(() => {}, 5000);
                         item.data.forEach((it) => {
